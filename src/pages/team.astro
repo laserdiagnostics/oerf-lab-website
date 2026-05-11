@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import TeamGrid from "../components/TeamGrid.astro";
+import { members } from "../data/members";
+---
+
+<BaseLayout title="Team" path="/team/">
+  <HeroSection
+    title="Our Team"
+    subtitle="Team Members"
+    tagline="A cross-disciplinary group of researchers with expertise spanning optical diagnostics, combustion science, plasma physics, and computational fluid dynamics."
+    compact
+  />
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        title="Faculty Members"
+        subtitle="Led by Prof. Weiwei Cai, our team brings together complementary expertise from world-leading institutions."
+      />
+      <TeamGrid members={members} />
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <SectionTitle
+        title="Join Us"
+        subtitle="We are always looking for motivated students and researchers."
+      />
+      <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+        <p>
+          The OERF Lab recruits Ph.D. students, Master's students, and undergraduate interns year-round.
+          Doctoral students have opportunities for co-training with renowned international collaborators.
+          Outstanding candidates may receive recommendation letters for top universities worldwide.
+        </p>
+        <p>
+          Prospective students and visiting scholars are welcome to contact individual faculty members
+          directly via email.
+        </p>
+        <a href="/contact/" class="btn btn-primary" style="margin-top: var(--spacing-4); display: inline-flex;">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

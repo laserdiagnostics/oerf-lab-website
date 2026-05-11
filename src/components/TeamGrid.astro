@@ -1,0 +1,16 @@
+---
+import TeamMemberCard from "./TeamMemberCard.astro";
+import type { Member } from "../data/members";
+
+export interface Props {
+  members: Member[];
+}
+
+const { members } = Astro.props;
+---
+
+<div class="team-grid">
+  {members
+    .sort((a, b) => a.order - b.order)
+    .map((member) => <TeamMemberCard member={member} />)}
+</div>

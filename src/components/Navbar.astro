@@ -1,0 +1,68 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/research/", label: "Research" },
+  { href: "/team/", label: "Team" },
+  { href: "/publications/", label: "Publications" },
+  { href: "/contact/", label: "Contact" },
+];
+---
+
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="8" fill="#0a2540"/>
+        <text x="16" y="22" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="700" font-size="16">O</text>
+      </svg>
+      OERF Lab
+    </a>
+
+    <div class="navbar-links" id="navLinks">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class:list={{ active: currentPath === link.href || (link.href !== "/" && currentPath.startsWith(link.href)) }}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("navLinks");
+  const navbar = document.getElementById("navbar");
+
+  hamburger?.addEventListener("click", () => {
+    hamburger.classList.toggle("open");
+    navLinks?.classList.toggle("open");
+  });
+
+  // Close mobile menu on link click
+  navLinks?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      hamburger?.classList.remove("open");
+      navLinks?.classList.remove("open");
+    });
+  });
+
+  // Add shadow on scroll
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+      navbar?.classList.add("scrolled");
+    } else {
+      navbar?.classList.remove("scrolled");
+    }
+  });
+</script>

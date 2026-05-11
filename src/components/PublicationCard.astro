@@ -1,0 +1,49 @@
+---
+import HighlightBadge from "./HighlightBadge.astro";
+import { boldNames } from "../data/publications";
+import type { Publication } from "../data/publications";
+
+export interface Props {
+  pub: Publication;
+}
+
+const { pub } = Astro.props;
+
+function renderAuthors(authors: string[]): string {
+  return authors
+    .map((author) => {
+      const isBolded = boldNames.some((name) => author.includes(name));
+      return isBolded ? `**${author}**` : author;
+    })
+    .join(", ");
+}
+---
+
+<div class="publication-card">
+  <div class="pub-authors">
+    {pub.authors.map((author, i) => {
+      const isBolded = boldNames.some((name) => author.includes(name));
+      return (
+        <span>
+          {i > 0 && ", "}
+          {isBolded ? <strong>{author}</strong> : author}
+        </span>
+      );
+    })}
+  </div>
+  <div class="pub-title">"{pub.title}"</div>
+  <div class="pub-journal">
+    {pub.journal}
+    {pub.volume ? `, ${pub.volume}` : ""}
+    {pub.pages ? `, ${pub.pages}` : ""}
+    ({pub.year})
+  </div>
+  {pub.doi && (
+    <div class="pub-meta">
+      <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener">
+        DOI: {pub.doi}
+      </a>
+      {pub.highlight && <HighlightBadge type={pub.highlight} />}
+    </div>
+  )}
+</div>

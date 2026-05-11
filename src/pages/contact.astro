@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ContactInfo from "../components/ContactInfo.astro";
+---
+
+<BaseLayout title="Contact" path="/contact/">
+  <HeroSection
+    title="Contact Us"
+    subtitle="Get in Touch"
+    tagline="Interested in joining our team, collaboration opportunities, or learning more about our research? We would love to hear from you."
+    compact
+  />
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        title="Contact Information"
+        subtitle="Visit or reach out to us."
+      />
+      <ContactInfo />
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <SectionTitle
+        title="Location"
+        subtitle="We are located on the Minhang campus of Shanghai Jiao Tong University."
+      />
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <p>
+          <strong>Institute of Turbomachinery</strong><br />
+          School of Mechanical Engineering<br />
+          Shanghai Jiao Tong University<br />
+          800 Dongchuan Road, Minhang District<br />
+          Shanghai 200240, China
+        </p>
+        <p style="margin-top: var(--spacing-4);">
+          <a
+            href="https://maps.google.com/?q=Shanghai+Jiao+Tong+University+Minhang+Campus"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary"
+          >
+            View on Google Maps
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

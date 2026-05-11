@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import PublicationList from "../components/PublicationList.astro";
+import { publications, isPubListed } from "../data/publications";
+
+const selectedPubs = publications.filter(isPubListed);
+---
+
+<BaseLayout title="Publications" path="/publications/">
+  <HeroSection
+    title="Publications"
+    subtitle="Selected Publications"
+    tagline="Representative publications from the OERF Lab. Team member names are highlighted in bold."
+    compact
+  />
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        title="Selected Publications"
+        subtitle="For full publication lists, please visit individual Google Scholar profiles."
+      />
+      <PublicationList publications={selectedPubs} />
+    </div>
+  </section>
+</BaseLayout>

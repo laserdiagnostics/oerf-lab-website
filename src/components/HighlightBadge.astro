@@ -1,0 +1,18 @@
+---
+export interface Props {
+  type: string;
+}
+
+const { type } = Astro.props;
+
+const labelMap: Record<string, string> = {
+  science: "Science",
+  nature: "Nature",
+  cover: "Cover Paper",
+  award: "Award",
+};
+
+const label = labelMap[type] || type;
+---
+
+<span class:list={["pub-badge", type]}>{label}</span>

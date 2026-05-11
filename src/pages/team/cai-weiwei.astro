@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MemberHero from "../../components/MemberHero.astro";
+import { members } from "../../data/members";
+
+const member = members.find((m) => m.id === "cai-weiwei")!;
+---
+
+<BaseLayout title={member.name} path={`/team/${member.id}/`}>
+  <section class="section" style="padding-top: calc(64px + var(--spacing-8));">
+    <div class="container">
+      <MemberHero member={member} />
+
+      <div class="member-detail-section">
+        <h2>Research Interests</h2>
+        <div class="interests-list">
+          {member.researchInterests.map((interest) => (
+            <span class="tag" style="font-size: var(--fs-small); padding: var(--spacing-2) var(--spacing-4);">
+              {interest}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="member-detail-section">
+        <h2>Biography</h2>
+        <p>{member.biography}</p>
+      </div>
+
+      <div class="member-detail-section">
+        <h2>Honors & Awards</h2>
+        <ul class="honors-list">
+          {member.honors.map((honor) => (
+            <li>{honor}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

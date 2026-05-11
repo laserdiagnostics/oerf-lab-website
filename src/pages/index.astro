@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ResearchCard from "../components/ResearchCard.astro";
+import TeamGrid from "../components/TeamGrid.astro";
+import HighlightBadge from "../components/HighlightBadge.astro";
+import { researchAreas } from "../data/research";
+import { members } from "../data/members";
+import { publications, isHomeHighlight } from "../data/publications";
+
+const highlightPubs = publications
+  .filter(isHomeHighlight)
+  .sort((a, b) => b.year - a.year);
+---
+
+<BaseLayout
+  title="Home"
+  description="OERF Lab — Optical & Extreme Reaction Flow research group at Shanghai Jiao Tong University. Pioneering optical diagnostics, computational imaging, ultrafast spectroscopy, and reacting flow simulation."
+  path=""
+>
+  <HeroSection
+    title="Optical &amp; Extreme Reaction Flow"
+    subtitle="OERF Lab"
+    tagline="Pioneering optical diagnostics, computational imaging, and reacting flow science for extreme environment energy and propulsion systems at Shanghai Jiao Tong University."
+    cta={[
+      { text: "Explore Research", href: "/research/" },
+      { text: "Meet Our Team", href: "/team/" },
+    ]}
+  />
+
+  <!-- Research Areas -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        title="Research Areas"
+        subtitle="We develop and apply advanced optical and computational techniques to understand and control extreme reaction flows."
+      />
+      <div class="research-grid">
+        {researchAreas.map((area) => (
+          <ResearchCard area={area} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Highlights -->
+  <section class="section section-alt">
+    <div class="container">
+      <SectionTitle
+        title="Latest Highlights"
+        subtitle="Selected high-impact research achievements from our team."
+      />
+      <div class="highlights-list">
+        {highlightPubs.map((pub) => (
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              {pub.highlight === "nature" ? "📘" : pub.highlight === "cover" ? "⭐" : pub.highlight === "science" ? "🔬" : "📄"}
+            </div>
+            <div class="highlight-content">
+              <h4>"{pub.title}"</h4>
+              <p>
+                {pub.journal}, {pub.year}
+                {pub.highlight && <HighlightBadge type={pub.highlight} />}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        title="Our Team"
+        subtitle="A cross-disciplinary team of faculty members at the Institute of Turbomachinery, School of Mechanical Engineering."
+      />
+      <TeamGrid members={members} />
+    </div>
+  </section>
+</BaseLayout>

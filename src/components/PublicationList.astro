@@ -1,0 +1,33 @@
+---
+import PublicationCard from "./PublicationCard.astro";
+import type { Publication } from "../data/publications";
+
+export interface Props {
+  publications: Publication[];
+}
+
+const { publications } = Astro.props;
+
+const sorted = [...publications].sort((a, b) => b.year - a.year);
+const grouped: Record<number, Publication[]> = {};
+
+for (const pub of sorted) {
+  if (!grouped[pub.year]) grouped[pub.year] = [];
+  grouped[pub.year].push(pub);
+}
+
+const years = Object.keys(grouped)
+  .map(Number)
+  .sort((a, b) => b - a);
+---
+
+<div class="publication-list">
+  {years.map((year) => (
+    <div>
+      <h3 class="publication-year">{year}</h3>
+      {grouped[year].map((pub) => (
+        <PublicationCard pub={pub} />
+      ))}
+    </div>
+  ))}
+</div>

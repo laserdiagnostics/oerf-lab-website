@@ -1,0 +1,19 @@
+---
+import type { ResearchArea } from "../data/research";
+
+export interface Props {
+  area: ResearchArea;
+}
+
+const { area } = Astro.props;
+---
+
+<div class="research-card">
+  <h3>{area.title}</h3>
+  <p>{area.summary}</p>
+  <div class="research-card-tags">
+    {area.highlights.map((h) => (
+      <span class="tag">{h}</span>
+    ))}
+  </div>
+</div>

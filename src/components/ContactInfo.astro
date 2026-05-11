@@ -1,0 +1,47 @@
+---
+import { SITE } from "../config";
+import { members } from "../data/members";
+---
+
+<div class="contact-grid">
+  <div>
+    <div class="contact-info-card">
+      <h3>Get in Touch</h3>
+      <div class="contact-item">
+        <div class="contact-label">Address</div>
+        <div class="contact-value">{SITE.address}</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Institute</div>
+        <div class="contact-value">{SITE.institute}</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">School</div>
+        <div class="contact-value">{SITE.school}</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">University</div>
+        <div class="contact-value">{SITE.university}</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="contact-info-card">
+      <h3>Team Members</h3>
+      <div class="contact-member-list">
+        {members
+          .sort((a, b) => a.order - b.order)
+          .map((m) => (
+            <div class="contact-member-item">
+              <div>
+                <div class="name">{m.name}</div>
+                <div class="role">{m.title}</div>
+              </div>
+              <a href={`mailto:${m.email}`}>{m.email}</a>
+            </div>
+          ))}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ResearchCard from "../components/ResearchCard.astro";
+import { researchAreas } from "../data/research";
+---
+
+<BaseLayout title="Research" path="/research/">
+  <HeroSection
+    title="Research"
+    subtitle="Our Research Areas"
+    tagline="We tackle fundamental and applied challenges at the intersection of optics, combustion, plasma physics, and computational science."
+    compact
+  />
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        title="Research Overview"
+        subtitle="Our work spans four interconnected research directions, combining advanced experimental diagnostics with high-fidelity numerical simulation."
+      />
+      <div class="research-grid">
+        {researchAreas.map((area) => (
+          <ResearchCard area={area} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <SectionTitle
+        title="Detailed Research Areas"
+        subtitle="Our research integrates experiment, theory, and computation."
+      />
+      <div style="display: flex; flex-direction: column; gap: var(--spacing-8);">
+        {researchAreas.map((area) => (
+          <div class="research-card" style="padding: var(--spacing-8);">
+            <h3>{area.title}</h3>
+            <p style="font-size: var(--fs-body); line-height: var(--lh-body); margin-bottom: var(--spacing-4);">
+              {area.description}
+            </p>
+            <h4 style="margin-bottom: var(--spacing-3);">Key Focus Areas</h4>
+            <div class="research-card-tags">
+              {area.highlights.map((h) => (
+                <span class="tag">{h}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

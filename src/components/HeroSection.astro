@@ -1,0 +1,28 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  tagline?: string;
+  compact?: boolean;
+  cta?: { text: string; href: string }[];
+}
+
+const { title, subtitle, tagline, compact, cta } = Astro.props;
+---
+
+<section class:list={{ hero: true, "hero-compact": compact }}>
+  <div class="hero-content">
+    {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+    <h1>{title}</h1>
+    {tagline && <p class="hero-tagline">{tagline}</p>}
+    {cta && cta.length > 0 && (
+      <div class="hero-actions">
+        {cta.map((btn) => (
+          <a href={btn.href} class:list={{ btn: true, "btn-primary": true }}>
+            {btn.text}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+import type { Member } from "../data/members";
+
+export interface Props {
+  member: Member;
+}
+
+const { member } = Astro.props;
+---
+
+<div class="member-hero">
+  <div class="member-photo">
+    <img
+      src={member.photo}
+      alt={member.name}
+      onerror="this.style.display='none';this.parentElement.innerHTML='<div class=member-photo-fallback>' + this.alt.split(' ').map(function(n){return n[0]}).join('') + '</div>'"
+    />
+  </div>
+  <div class="member-info">
+    <h1>{member.name}</h1>
+    <div class="member-name-zh">{member.nameZh}</div>
+    <div class="member-title">{member.title}</div>
+    <a href={`mailto:${member.email}`} class="member-email">{member.email}</a>
+
+    <h4 style="margin-top: var(--spacing-4); margin-bottom: var(--spacing-2);">Education</h4>
+    <ul class="education-list">
+      {member.education.map((edu) => (
+        <li>
+          <span class="degree">{edu.degree}</span>
+          <span class="institution">{edu.institution}</span>
+          <span style="color: var(--color-text-secondary); margin-left: auto;">{edu.period}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
