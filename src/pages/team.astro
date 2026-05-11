@@ -4,6 +4,7 @@ import HeroSection from "../components/HeroSection.astro";
 import SectionTitle from "../components/SectionTitle.astro";
 import TeamGrid from "../components/TeamGrid.astro";
 import { members } from "../data/members";
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
 ---
 
 <BaseLayout title="Team" path="/team/">
@@ -40,7 +41,7 @@ import { members } from "../data/members";
           Prospective students and visiting scholars are welcome to contact individual faculty members
           directly via email.
         </p>
-        <a href="/contact/" class="btn btn-primary" style="margin-top: var(--spacing-4); display: inline-flex;">
+        <a href={`${base}/contact/`} class="btn btn-primary" style="margin-top: var(--spacing-4); display: inline-flex;">
           Contact Us
         </a>
       </div>

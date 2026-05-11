@@ -12,6 +12,7 @@ import { publications, isHomeHighlight } from "../data/publications";
 const highlightPubs = publications
   .filter(isHomeHighlight)
   .sort((a, b) => b.year - a.year);
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
 ---
 
 <BaseLayout
@@ -24,8 +25,8 @@ const highlightPubs = publications
     subtitle="OERF Lab"
     tagline="Pioneering optical diagnostics, computational imaging, and reacting flow science for extreme environment energy and propulsion systems at Shanghai Jiao Tong University."
     cta={[
-      { text: "Explore Research", href: "/research/" },
-      { text: "Meet Our Team", href: "/team/" },
+      { text: "Explore Research", href: `${base}/research/` },
+      { text: "Meet Our Team", href: `${base}/team/` },
     ]}
   />
 

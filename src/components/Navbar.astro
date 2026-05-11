@@ -1,18 +1,21 @@
 ---
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/research/", label: "Research" },
-  { href: "/team/", label: "Team" },
-  { href: "/publications/", label: "Publications" },
-  { href: "/contact/", label: "Contact" },
+  { href: `${base}/`, label: "Home" },
+  { href: `${base}/research/`, label: "Research" },
+  { href: `${base}/team/`, label: "Team" },
+  { href: `${base}/publications/`, label: "Publications" },
+  { href: `${base}/contact/`, label: "Contact" },
 ];
+
+const homeHref = `${base}/`;
 ---
 
 <nav class="navbar" id="navbar">
   <div class="container">
-    <a href="/" class="navbar-brand">
+    <a href={`${base}/`} class="navbar-brand">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="32" height="32" rx="8" fill="#0a2540"/>
         <text x="16" y="22" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="700" font-size="16">O</text>
@@ -24,7 +27,7 @@ const links = [
       {links.map((link) => (
         <a
           href={link.href}
-          class:list={{ active: currentPath === link.href || (link.href !== "/" && currentPath.startsWith(link.href)) }}
+          class:list={{ active: currentPath === link.href || (link.href !== homeHref && currentPath.startsWith(link.href)) }}
         >
           {link.label}
         </a>
