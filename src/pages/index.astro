@@ -107,7 +107,7 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
   </section>
 
   <!-- Research Areas -->
-  <section class="section">
+  <section class="section" id="research-areas">
     <div class="container">
       <SectionTitle
         title="Research Areas"
@@ -183,7 +183,7 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
             {otherHighlights.map((pub) => (
               <a
                 class="highlight-item"
-                href={`https://doi.org/${pub.doi}`}
+                href={pub.paperUrl ?? `https://doi.org/${pub.doi}`}
                 target="_blank"
                 rel="noreferrer"
               >

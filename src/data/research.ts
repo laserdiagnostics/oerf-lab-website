@@ -5,12 +5,21 @@ export interface ResearchArea {
   description: string;
   highlights: string[];
   memberIds: string[];
+  image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
 }
 
 export const researchAreas: ResearchArea[] = [
   {
     id: "optical-diagnostics",
     title: "Extreme Reaction Flow Diagnostics",
+    image: "extreme-reaction-flow-diagnostics-2024.webp",
+    imageAlt:
+      "Multi-view laser-induced incandescence experiment and three-dimensional soot-flame reconstructions",
+    imageWidth: 1672,
+    imageHeight: 941,
     summary:
       "Advanced optical and laser-based diagnostics for probing high-temperature, high-pressure reacting flows in aero-engines and hypersonic vehicles.",
     description:
@@ -26,6 +35,11 @@ export const researchAreas: ResearchArea[] = [
   {
     id: "computational-imaging",
     title: "Computational Imaging & Miniature Spectrometers",
+    image: "computational-imaging-miniature-spectrometers.webp",
+    imageAlt:
+      "Multidimensional light-field encoding and computational reconstruction using miniature spectrometer mechanisms",
+    imageWidth: 1672,
+    imageHeight: 941,
     summary:
       "Light-field imaging, linear/nonlinear tomography, and miniature computational spectrometers for high-dimensional optical sensing.",
     description:
@@ -41,6 +55,11 @@ export const researchAreas: ResearchArea[] = [
   {
     id: "ultrafast-spectroscopy",
     title: "Ultrafast Laser Spectroscopy & Plasma Energy Conversion",
+    image: "ultrafast-laser-plasma-energy-conversion.webp",
+    imageAlt:
+      "Ultrafast laser spectroscopy setup with plasma emission, interferometry and Thomson-scattering diagnostics",
+    imageWidth: 1536,
+    imageHeight: 1024,
     summary:
       "Femtosecond laser spectroscopy, plasma-assisted energy conversion, and ultrahigh-temperature materials synthesis.",
     description:
@@ -56,6 +75,11 @@ export const researchAreas: ResearchArea[] = [
   {
     id: "reacting-flow-simulation",
     title: "Reacting Flow Simulation & Data Assimilation",
+    image: "reacting-flow-simulation-data-assimilation.webp",
+    imageAlt:
+      "TDLAS tomography measurements assimilated into a reacting-flow CFD model to reduce prediction uncertainty",
+    imageWidth: 1672,
+    imageHeight: 941,
     summary:
       "High-fidelity CFD, machine learning-augmented combustion modeling, and data assimilation for turbulent reacting flows.",
     description:

@@ -38,10 +38,10 @@ function renderAuthors(authors: string[]): string {
     {pub.pages ? `, ${pub.pages}` : ""}
     ({pub.year})
   </div>
-  {pub.doi && (
+  {(pub.doi || pub.paperUrl) && (
     <div class="pub-meta">
-      <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener">
-        DOI: {pub.doi}
+      <a href={pub.doi ? `https://doi.org/${pub.doi}` : pub.paperUrl} target="_blank" rel="noopener">
+        {pub.doi ? `DOI: ${pub.doi}` : "View paper"}
       </a>
       {pub.highlight && <HighlightBadge type={pub.highlight} />}
     </div>
