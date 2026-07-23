@@ -47,7 +47,7 @@ export const ui: Bilingual<UIStrings> = {
     team: "Team",
     publications: "Publications",
     contact: "Contact",
-    joinUs: "Join Us",
+    joinUs: "Join us",
     quickLinks: "Quick Links",
     connect: "Connect",
     readPaper: "Read the paper",

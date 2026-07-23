@@ -17,11 +17,12 @@ const targetLocale: Locale = locale === "zh" ? "en" : "zh";
 const languageHref = localePath(targetLocale, routePath);
 
 const links = [
-  { key: "home", href: localePath(locale, staticRoutes.home), label: copy.home },
-  { key: "research", href: localePath(locale, staticRoutes.research), label: copy.research },
-  { key: "team", href: localePath(locale, staticRoutes.team), label: copy.team },
-  { key: "publications", href: localePath(locale, staticRoutes.publications), label: copy.publications },
-  { key: "contact", href: localePath(locale, staticRoutes.contact), label: copy.contact },
+  { href: localePath(locale, staticRoutes.home), label: copy.home, active: resolvedActiveRoute === "home" },
+  { href: localePath(locale, staticRoutes.research), label: copy.research, active: resolvedActiveRoute === "research" },
+  { href: localePath(locale, staticRoutes.team), label: copy.team, active: resolvedActiveRoute === "team" },
+  { href: localePath(locale, staticRoutes.publications), label: copy.publications, active: resolvedActiveRoute === "publications" },
+  { href: `${localePath(locale, staticRoutes.home)}#join-us`, label: copy.joinUs, active: false },
+  { href: localePath(locale, staticRoutes.contact), label: copy.contact, active: resolvedActiveRoute === "contact" },
 ] as const;
 ---
 
@@ -37,7 +38,7 @@ const links = [
 
     <div class="navbar-links" id="navLinks">
       {links.map((link) => (
-        <a href={link.href} class:list={{ active: resolvedActiveRoute === link.key }}>
+        <a href={link.href} class:list={{ active: link.active }}>
           {link.label}
         </a>
       ))}

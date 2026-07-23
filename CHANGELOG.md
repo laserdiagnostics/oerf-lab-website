@@ -6,6 +6,7 @@ This file records material content, data, and layout changes so future updates c
 
 ### Homepage recruitment section
 
+- Added `Join us / 加入我们` to the shared desktop and mobile navigation, linking directly to the localized homepage recruitment section.
 - Added a bilingual **Join OERF / 加入我们** section after Latest Highlights on both homepages.
 - Added four original recruitment comic pages with accessible captions, descriptive alternative text, and optimized WebP delivery without publishing the character reference sheet.
 - Added a mobile-first recruitment summary, detailed opportunity and application information, and direct email links for all four faculty members.
