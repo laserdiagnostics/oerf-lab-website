@@ -7,7 +7,7 @@ This file records material content, data, and layout changes so future updates c
 ### Homepage layout and navigation
 
 - Added `Join us / 加入我们` to the shared desktop and mobile navigation, linking directly to the localized homepage recruitment section.
-- Reduced the homepage hero height by half on desktop and mobile, with proportionally tighter vertical spacing.
+- Resized the homepage hero to a balanced intermediate height: `52.5vh` on desktop and `45vh` on mobile, while keeping internal-page heroes compact.
 
 ### Homepage recruitment section
 

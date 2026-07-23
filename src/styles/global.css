@@ -321,7 +321,7 @@ p {
 
 /* ----- 7. Hero ----- */
 .hero {
-  min-height: 35vh;
+  min-height: 52.5vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1351,7 +1351,7 @@ p {
   }
 
   .hero {
-    min-height: 30vh;
+    min-height: 45vh;
     padding-top: var(--spacing-16);
     padding-bottom: var(--spacing-8);
   }
