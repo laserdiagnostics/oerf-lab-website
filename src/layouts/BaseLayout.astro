@@ -6,7 +6,7 @@ import { absoluteAssetUrl, localeAbsoluteUrl } from "../i18n/routes";
 import type { ActiveRoute } from "../i18n/routes";
 import { htmlLang } from "../i18n/types";
 import type { Locale } from "../i18n/types";
-import "@fontsource-variable/inter";
+import interLatinUrl from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import "../styles/global.css";
 
 export interface Props {
@@ -53,6 +53,7 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
     <link rel="alternate" hreflang="x-default" href={enUrl} />
+    <link rel="preload" href={interLatinUrl} as="font" type="font/woff2" crossorigin="anonymous" />
 
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDesc} />
@@ -83,7 +84,7 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
         "@type": "Place",
         address: {
           "@type": "PostalAddress",
-          addressLocality: locale === "zh" ? "上海" : "Shanghai",
+          addressLocality: site.addressLocality,
           addressCountry: "CN",
         },
       },

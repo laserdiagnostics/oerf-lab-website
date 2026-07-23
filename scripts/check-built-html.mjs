@@ -15,6 +15,15 @@ const failures = [];
 const htmlFiles = walkFiles(DIST_DIR, ".html").filter((file) => relativeDistPath(file) !== "404.html");
 const builtPaths = new Set(htmlFiles.map(htmlFileToSitePath));
 
+const staleManifests = walkFiles(DIST_DIR).filter((file) => /(^|[\\/])manifest_[^\\/]+\.mjs$/.test(file));
+if (staleManifests.length > 0) {
+  failures.push(`production dist contains ${staleManifests.length} stale development manifest file(s)`);
+}
+const fontFiles = walkFiles(DIST_DIR, ".woff2");
+if (fontFiles.length !== 1) {
+  failures.push(`production dist must contain exactly one Latin WOFF2 font, found ${fontFiles.length}`);
+}
+
 for (const file of htmlFiles) {
   const relative = relativeDistPath(file);
   const sitePath = htmlFileToSitePath(file);
@@ -98,6 +107,9 @@ for (const file of htmlFiles) {
   if (source.includes("/zh/zh/")) failures.push(`${relative}: contains duplicate /zh/zh/ path`);
   if (source.includes(`${BASE_PATH}${BASE_PATH}`)) failures.push(`${relative}: contains duplicate base path`);
   if (/fonts\.(googleapis|gstatic)\.com/.test(source)) failures.push(`${relative}: still depends on Google Fonts`);
+  if ($('link[rel="preload"][as="font"][type="font/woff2"]').length !== 1) {
+    failures.push(`${relative}: expected one self-hosted font preload`);
+  }
 }
 
 const notFoundFile = `${DIST_DIR}/404.html`;
@@ -106,6 +118,9 @@ if (!fs.existsSync(notFoundFile)) {
 } else {
   const $404 = load(fs.readFileSync(notFoundFile, "utf8"));
   if ($404('meta[name="robots"]').attr("content") !== "noindex") failures.push("404.html: missing noindex");
+  if ($404('link[rel="preload"][as="font"][type="font/woff2"]').length !== 1) {
+    failures.push("404.html: expected one self-hosted font preload");
+  }
   if ($404('[data-error-locale="en"]').length !== 1 || $404('[data-error-locale="zh"]').length !== 1) {
     failures.push("404.html: must contain one English and one Chinese state");
   }

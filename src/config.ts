@@ -8,6 +8,7 @@ export interface SiteCopy {
   university: string;
   institute: string;
   address: string;
+  addressLocality: string;
 }
 
 export const SITE = {
@@ -24,6 +25,7 @@ export const SITE = {
       university: "Shanghai Jiao Tong University",
       institute: "Institute of Turbomachinery",
       address: "800 Dongchuan Road, Minhang, Shanghai 200240, China",
+      addressLocality: "Shanghai",
     },
     zh: {
       title: "OERF Lab — 光学与极端反应流实验室",
@@ -34,6 +36,7 @@ export const SITE = {
       university: "上海交通大学",
       institute: "叶轮机械研究所",
       address: "中国上海市闵行区东川路 800 号，邮编 200240",
+      addressLocality: "上海",
     },
   } satisfies Bilingual<SiteCopy>,
 };

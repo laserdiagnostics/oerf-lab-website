@@ -5,6 +5,7 @@
   "description": "OERF Lab - Optical & Extreme Reaction Flow Research Group at SJTU",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/clean-dist.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "check:types": "astro check",

@@ -39,10 +39,12 @@ src/
 
 ## Maintenance
 
+See [I18N.md](./I18N.md) for bilingual content, routing, SEO, and verification rules.
+
 ### Adding a team member
 1. Add photo to `public/images/team/`
-2. Add member data to `src/data/members.ts`
-3. Create profile page `src/pages/team/[slug].astro`
+2. Add bilingual member data to `src/data/members.ts`
+3. The English and Chinese profile pages are generated automatically from the stable member ID
 
 ### Adding a publication
 - Edit `src/data/publications.ts`
@@ -52,4 +54,4 @@ src/
 
 ## Deployment
 
-Push to `main` branch — GitHub Actions auto-deploys to GitHub Pages.
+Run `npm run verify`, then push to `main`. GitHub Actions repeats the full verification suite and deploys to GitHub Pages.

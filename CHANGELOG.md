@@ -4,6 +4,15 @@ This file records material content, data, and layout changes so future updates c
 
 ## 2026-07-23
 
+### Post-audit hardening
+
+- Isolated development output in `.astro-dev/` so running dev servers cannot remove production sitemap files or add development manifests to `dist/`.
+- Added a cross-platform, path-guarded production clean step before every build and validation that rejects stale manifest files.
+- Reduced Inter from all language subsets to one self-hosted Latin variable-font file and added font preload hints; Chinese continues to use system fonts.
+- Improved missing-photo fallbacks to show two initials for spaced Latin names or the first two characters for Chinese names.
+- Moved the localized JSON-LD city name into the typed `SITE.content` configuration.
+- Added `I18N.md` with bilingual content, route, SEO, font, and verification maintenance rules.
+
 ### Bilingual site
 
 - Added a complete Chinese site under `/zh/` while preserving every existing English URL.

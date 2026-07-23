@@ -6,6 +6,7 @@ import { publications } from "../src/data/publications";
 import { researchAreas } from "../src/data/research";
 import { pageCopy } from "../src/i18n/pages";
 import { ui } from "../src/i18n/ui";
+import { nameFallback } from "../src/utils/name-fallback";
 
 const failures: string[] = [];
 
@@ -81,6 +82,9 @@ for (const highlight of featuredHighlightConfigs) {
 if (publications.length !== 245) {
   fail(`Expected 245 publications, found ${publications.length}`);
 }
+
+if (nameFallback("Weiwei Cai") !== "WC") fail("English photo fallback must use two initials");
+if (nameFallback("蔡伟伟") !== "蔡伟") fail("Chinese photo fallback must use the first two characters");
 
 const requiredRoutes = ["home", "research", "team", "publications", "contact"];
 const routeManifest = fs.readFileSync(new URL("../src/i18n/routes.ts", import.meta.url), "utf8");
