@@ -1,46 +1,59 @@
 ---
 import { SITE } from "../config";
 import { members } from "../data/members";
+import { t } from "../i18n/ui";
+import type { Locale } from "../i18n/types";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const labels = t(locale);
+const site = SITE.content[locale];
 ---
 
 <div class="contact-grid">
   <div>
     <div class="contact-info-card">
-      <h3>Get in Touch</h3>
+      <h3>{labels.contactUs}</h3>
       <div class="contact-item">
-        <div class="contact-label">Address</div>
-        <div class="contact-value">{SITE.address}</div>
+        <div class="contact-label">{labels.address}</div>
+        <div class="contact-value">{site.address}</div>
       </div>
       <div class="contact-item">
-        <div class="contact-label">Institute</div>
-        <div class="contact-value">{SITE.institute}</div>
+        <div class="contact-label">{labels.institute}</div>
+        <div class="contact-value">{site.institute}</div>
       </div>
       <div class="contact-item">
-        <div class="contact-label">School</div>
-        <div class="contact-value">{SITE.school}</div>
+        <div class="contact-label">{labels.school}</div>
+        <div class="contact-value">{site.school}</div>
       </div>
       <div class="contact-item">
-        <div class="contact-label">University</div>
-        <div class="contact-value">{SITE.university}</div>
+        <div class="contact-label">{labels.university}</div>
+        <div class="contact-value">{site.university}</div>
       </div>
     </div>
   </div>
 
   <div>
     <div class="contact-info-card">
-      <h3>Team Members</h3>
+      <h3>{labels.teamMembers}</h3>
       <div class="contact-member-list">
-        {members
+        {[...members]
           .sort((a, b) => a.order - b.order)
-          .map((m) => (
-            <div class="contact-member-item">
-              <div>
-                <div class="name">{m.name}</div>
-                <div class="role">{m.title}</div>
+          .map((member) => {
+            const copy = member.content[locale];
+            return (
+              <div class="contact-member-item">
+                <div>
+                  <div class="name">{copy.displayName}</div>
+                  <div class="role">{copy.title}</div>
+                </div>
+                <a href={`mailto:${member.email}`}>{member.email}</a>
               </div>
-              <a href={`mailto:${m.email}`}>{m.email}</a>
-            </div>
-          ))}
+            );
+          })}
       </div>
     </div>
   </div>

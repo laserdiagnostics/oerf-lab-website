@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MemberHero from "../components/MemberHero.astro";
+import type { Member } from "../data/members";
+import { memberRoute } from "../i18n/routes";
+import { t } from "../i18n/ui";
+import type { Locale } from "../i18n/types";
+
+export interface Props { locale: Locale; member: Member; }
+const { locale, member } = Astro.props;
+const copy = member.content[locale];
+const labels = t(locale);
+---
+
+<BaseLayout locale={locale} activeRoute="member" routePath={memberRoute(member.id)} title={copy.displayName} description={copy.biography}>
+  <section class="section" style="padding-top: calc(64px + var(--spacing-8));">
+    <div class="container">
+      <MemberHero member={member} locale={locale} />
+      <div class="member-detail-section">
+        <h2>{labels.researchInterests}</h2>
+        <div class="interests-list">
+          {copy.researchInterests.map((interest) => (
+            <span class="tag" style="font-size: var(--fs-small); padding: var(--spacing-2) var(--spacing-4);">{interest}</span>
+          ))}
+        </div>
+      </div>
+      <div class="member-detail-section">
+        <h2>{labels.biography}</h2>
+        <p>{copy.biography}</p>
+      </div>
+      <div class="member-detail-section">
+        <h2>{labels.honorsAwards}</h2>
+        <ul class="honors-list">{copy.honors.map((honor) => <li>{honor}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

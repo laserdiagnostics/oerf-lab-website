@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import PublicationList from "../components/PublicationList.astro";
+import { publications, isPubListed } from "../data/publications";
+import { pageCopy } from "../i18n/pages";
+import { staticRoutes } from "../i18n/routes";
+import type { Locale } from "../i18n/types";
+
+export interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const copy = pageCopy[locale].publications;
+const selectedPubs = publications.filter(isPubListed);
+---
+
+<BaseLayout locale={locale} activeRoute="publications" routePath={staticRoutes.publications} title={copy.metaTitle}>
+  <HeroSection title={copy.heroTitle} subtitle={copy.heroSubtitle} tagline={copy.heroTagline} compact />
+  <section class="section">
+    <div class="container">
+      <SectionTitle title={copy.sectionTitle} subtitle={copy.sectionSubtitle} />
+      <PublicationList publications={selectedPubs} locale={locale} />
+    </div>
+  </section>
+</BaseLayout>

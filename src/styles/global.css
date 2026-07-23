@@ -20,7 +20,7 @@
   --color-highlight-nature: #e8a817;
   --color-highlight-cover: #1a8a4a;
 
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", monospace;
 
   --fs-hero: clamp(2rem, 4vw, 3.5rem);
@@ -251,6 +251,22 @@ p {
   height: 2px;
   background: var(--color-accent);
   border-radius: 1px;
+}
+
+.navbar-links .language-switch {
+  min-width: 2.75rem;
+  padding: 0.35rem 0.7rem;
+  text-align: center;
+  color: var(--color-navy);
+  background: var(--color-accent-soft);
+  border: 1px solid rgba(44, 111, 187, 0.22);
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.navbar-links .language-switch:hover {
+  color: var(--color-accent);
+  background: #dce9fb;
 }
 
 .hamburger {

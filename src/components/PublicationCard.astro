@@ -2,21 +2,16 @@
 import HighlightBadge from "./HighlightBadge.astro";
 import { boldNames } from "../data/publications";
 import type { Publication } from "../data/publications";
+import type { Locale } from "../i18n/types";
+import { t } from "../i18n/ui";
 
 export interface Props {
   pub: Publication;
+  locale: Locale;
 }
 
-const { pub } = Astro.props;
-
-function renderAuthors(authors: string[]): string {
-  return authors
-    .map((author) => {
-      const isBolded = boldNames.some((name) => author.includes(name));
-      return isBolded ? `**${author}**` : author;
-    })
-    .join(", ");
-}
+const { pub, locale } = Astro.props;
+const copy = t(locale);
 ---
 
 <div class="publication-card">
@@ -41,9 +36,9 @@ function renderAuthors(authors: string[]): string {
   {(pub.doi || pub.paperUrl) && (
     <div class="pub-meta">
       <a href={pub.doi ? `https://doi.org/${pub.doi}` : pub.paperUrl} target="_blank" rel="noopener">
-        {pub.doi ? `DOI: ${pub.doi}` : "View paper"}
+        {pub.doi ? `DOI: ${pub.doi}` : copy.viewPaper}
       </a>
-      {pub.highlight && <HighlightBadge type={pub.highlight} />}
+      {pub.highlight && <HighlightBadge type={pub.highlight} locale={locale} />}
     </div>
   )}
 </div>

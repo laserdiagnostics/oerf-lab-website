@@ -1,0 +1,10 @@
+---
+import MemberView from "../../views/MemberView.astro";
+import type { Member } from "../../data/members";
+import { getMemberStaticPaths } from "../../i18n/member-paths";
+
+export const getStaticPaths = getMemberStaticPaths;
+interface Props { member: Member; }
+const { member } = Astro.props;
+---
+<MemberView locale="en" member={member} />

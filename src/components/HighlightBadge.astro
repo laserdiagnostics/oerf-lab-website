@@ -1,18 +1,19 @@
 ---
 export interface Props {
   type: string;
+  locale: "en" | "zh";
 }
 
-const { type } = Astro.props;
+const { type, locale } = Astro.props;
 
-const labelMap: Record<string, string> = {
-  science: "Science",
-  nature: "Nature",
-  cover: "Cover Paper",
-  award: "Award",
+const labelMap: Record<string, Record<"en" | "zh", string>> = {
+  science: { en: "Science", zh: "Science" },
+  nature: { en: "Nature", zh: "Nature" },
+  cover: { en: "Cover Paper", zh: "封面论文" },
+  award: { en: "Award", zh: "获奖成果" },
 };
 
-const label = labelMap[type] || type;
+const label = labelMap[type]?.[locale] || type;
 ---
 
 <span class:list={["pub-badge", type]}>{label}</span>

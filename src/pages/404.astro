@@ -1,0 +1,77 @@
+---
+import "@fontsource-variable/inter";
+import "../styles/global.css";
+import { localePath, staticRoutes } from "../i18n/routes";
+import { ui } from "../i18n/ui";
+
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Page Not Found | OERF Lab</title>
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+  </head>
+  <body>
+    <main class="not-found-page">
+      <section data-error-locale="en">
+        <p class="hero-subtitle">404</p>
+        <h1>{ui.en.pageNotFound}</h1>
+        <p>{ui.en.pageNotFoundDescription}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href={localePath("en", staticRoutes.home)}>{ui.en.backHome}</a>
+          <a class="btn btn-primary" href={localePath("en", staticRoutes.research)}>{ui.en.research}</a>
+        </div>
+      </section>
+      <section data-error-locale="zh" lang="zh-CN" hidden>
+        <p class="hero-subtitle">404</p>
+        <h1>{ui.zh.pageNotFound}</h1>
+        <p>{ui.zh.pageNotFoundDescription}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href={localePath("zh", staticRoutes.home)}>{ui.zh.backHome}</a>
+          <a class="btn btn-primary" href={localePath("zh", staticRoutes.research)}>{ui.zh.research}</a>
+        </div>
+      </section>
+      <noscript>
+        <p>页面未找到。请返回主页。 / Page not found. Please return to the home page.</p>
+      </noscript>
+    </main>
+    <script is:inline define:vars={{ base }}>
+      const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+      const isChinese = window.location.pathname.startsWith(`${normalizedBase}zh/`);
+      document.documentElement.lang = isChinese ? "zh-CN" : "en";
+      document.title = isChinese ? "页面未找到 | OERF Lab" : "Page Not Found | OERF Lab";
+      document.querySelectorAll("[data-error-locale]").forEach((section) => {
+        section.hidden = section.dataset.errorLocale !== (isChinese ? "zh" : "en");
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  .not-found-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: var(--spacing-8);
+    text-align: center;
+    background: var(--color-bg-alt);
+  }
+
+  .not-found-page section {
+    max-width: 680px;
+  }
+
+  .not-found-page h1 {
+    margin-bottom: var(--spacing-4);
+  }
+
+  .not-found-page .hero-actions {
+    justify-content: center;
+    margin-top: var(--spacing-6);
+  }
+</style>

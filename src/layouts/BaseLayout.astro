@@ -2,78 +2,98 @@
 import { SITE } from "../config";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import { absoluteAssetUrl, localeAbsoluteUrl } from "../i18n/routes";
+import type { ActiveRoute } from "../i18n/routes";
+import { htmlLang } from "../i18n/types";
+import type { Locale } from "../i18n/types";
+import "@fontsource-variable/inter";
 import "../styles/global.css";
 
 export interface Props {
+  locale: Locale;
+  activeRoute: ActiveRoute;
+  routePath: string;
   title: string;
   description?: string;
-  path?: string;
+  ogImage?: string;
+  noindex?: boolean;
 }
 
-const { title, description, path } = Astro.props;
+const {
+  locale,
+  activeRoute,
+  routePath,
+  title,
+  description,
+  ogImage,
+  noindex = false,
+} = Astro.props;
+
+const site = SITE.content[locale];
+const pageTitle = `${title} | ${site.shortName}`;
+const pageDesc = description || site.description;
+const enUrl = localeAbsoluteUrl("en", routePath);
+const zhUrl = localeAbsoluteUrl("zh", routePath);
+const pageUrl = locale === "zh" ? zhUrl : enUrl;
+const DEFAULT_OG_IMAGE = "/images/og/oerf-lab-share.webp";
+const ogImageUrl = absoluteAssetUrl(ogImage ?? DEFAULT_OG_IMAGE);
 const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
-const pageTitle = `${title} | ${SITE.shortName}`;
-const pageDesc = description || SITE.description;
-const pageUrl = path ? `${SITE.url}${path}` : SITE.url;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={htmlLang(locale)}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
+    {noindex && <meta name="robots" content="noindex" />}
 
-    <!-- Open Graph -->
+    <link rel="canonical" href={pageUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDesc} />
     <meta property="og:url" content={pageUrl} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={`${SITE.url}/og-image.png`} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={locale === "zh" ? "zh_CN" : "en_US"} />
+    <meta property="og:locale:alternate" content={locale === "zh" ? "en_US" : "zh_CN"} />
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "ResearchOrganization",
-      name: SITE.shortName,
-      description: SITE.description,
+      name: site.shortName,
+      description: site.description,
       url: SITE.url,
       parentOrganization: {
         "@type": "CollegeOrUniversity",
-        name: SITE.university,
+        name: site.university,
       },
       location: {
         "@type": "Place",
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Shanghai",
+          addressLocality: locale === "zh" ? "上海" : "Shanghai",
           addressCountry: "CN",
         },
       },
     })}></script>
   </head>
   <body>
-    <Navbar />
+    <Navbar locale={locale} activeRoute={activeRoute} routePath={routePath} />
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer locale={locale} />
   </body>
 </html>

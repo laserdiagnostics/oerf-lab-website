@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ContactInfo from "../components/ContactInfo.astro";
+import { SITE } from "../config";
+import { pageCopy } from "../i18n/pages";
+import { staticRoutes } from "../i18n/routes";
+import { t } from "../i18n/ui";
+import type { Locale } from "../i18n/types";
+
+export interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const copy = pageCopy[locale].contact;
+const labels = t(locale);
+const site = SITE.content[locale];
+---
+
+<BaseLayout locale={locale} activeRoute="contact" routePath={staticRoutes.contact} title={copy.metaTitle}>
+  <HeroSection title={copy.heroTitle} subtitle={copy.heroSubtitle} tagline={copy.heroTagline} compact />
+  <section class="section">
+    <div class="container">
+      <SectionTitle title={copy.infoTitle} subtitle={copy.infoSubtitle} />
+      <ContactInfo locale={locale} />
+    </div>
+  </section>
+  <section class="section section-alt">
+    <div class="container">
+      <SectionTitle title={copy.locationTitle} subtitle={copy.locationSubtitle} />
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <p>
+          <strong>{site.institute}</strong><br />
+          {site.school}<br />
+          {site.university}<br />
+          {site.address}
+        </p>
+        <p style="margin-top: var(--spacing-4);">
+          <a href="https://maps.google.com/?q=Shanghai+Jiao+Tong+University+Minhang+Campus" target="_blank" rel="noopener" class="btn btn-primary">
+            {labels.viewOnGoogleMaps}
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

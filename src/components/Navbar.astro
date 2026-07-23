@@ -1,23 +1,35 @@
 ---
-const currentPath = Astro.url.pathname;
-const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
+import { localePath, staticRoutes } from "../i18n/routes";
+import type { ActiveRoute } from "../i18n/routes";
+import { t } from "../i18n/ui";
+import type { Locale } from "../i18n/types";
+
+export interface Props {
+  locale: Locale;
+  activeRoute: ActiveRoute;
+  routePath: string;
+}
+
+const { locale, activeRoute, routePath } = Astro.props;
+const copy = t(locale);
+const resolvedActiveRoute = activeRoute === "member" ? "team" : activeRoute;
+const targetLocale: Locale = locale === "zh" ? "en" : "zh";
+const languageHref = localePath(targetLocale, routePath);
 
 const links = [
-  { href: `${base}/`, label: "Home" },
-  { href: `${base}/research/`, label: "Research" },
-  { href: `${base}/team/`, label: "Team" },
-  { href: `${base}/publications/`, label: "Publications" },
-  { href: `${base}/contact/`, label: "Contact" },
-];
-
-const homeHref = `${base}/`;
+  { key: "home", href: localePath(locale, staticRoutes.home), label: copy.home },
+  { key: "research", href: localePath(locale, staticRoutes.research), label: copy.research },
+  { key: "team", href: localePath(locale, staticRoutes.team), label: copy.team },
+  { key: "publications", href: localePath(locale, staticRoutes.publications), label: copy.publications },
+  { key: "contact", href: localePath(locale, staticRoutes.contact), label: copy.contact },
+] as const;
 ---
 
 <nav class="navbar" id="navbar">
   <div class="container">
-    <a href={`${base}/`} class="navbar-brand">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="32" height="32" rx="8" fill="#0a2540"/>
+    <a href={localePath(locale, staticRoutes.home)} class="navbar-brand">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#0a2540" />
         <text x="16" y="22" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="700" font-size="16">O</text>
       </svg>
       OERF Lab
@@ -25,16 +37,22 @@ const homeHref = `${base}/`;
 
     <div class="navbar-links" id="navLinks">
       {links.map((link) => (
-        <a
-          href={link.href}
-          class:list={{ active: currentPath === link.href || (link.href !== homeHref && currentPath.startsWith(link.href)) }}
-        >
+        <a href={link.href} class:list={{ active: resolvedActiveRoute === link.key }}>
           {link.label}
         </a>
       ))}
+      <a
+        class="language-switch"
+        href={languageHref}
+        lang={targetLocale === "zh" ? "zh-CN" : "en"}
+        hreflang={targetLocale === "zh" ? "zh-CN" : "en"}
+        aria-label={copy.switchLanguage}
+      >
+        {copy.languageSwitchShort}
+      </a>
     </div>
 
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <button class="hamburger" id="hamburger" aria-label={copy.toggleMenu} aria-controls="navLinks" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
@@ -48,24 +66,20 @@ const homeHref = `${base}/`;
   const navbar = document.getElementById("navbar");
 
   hamburger?.addEventListener("click", () => {
-    hamburger.classList.toggle("open");
-    navLinks?.classList.toggle("open");
+    const isOpen = hamburger.classList.toggle("open");
+    hamburger.setAttribute("aria-expanded", String(isOpen));
+    navLinks?.classList.toggle("open", isOpen);
   });
 
-  // Close mobile menu on link click
   navLinks?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       hamburger?.classList.remove("open");
+      hamburger?.setAttribute("aria-expanded", "false");
       navLinks?.classList.remove("open");
     });
   });
 
-  // Add shadow on scroll
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 10) {
-      navbar?.classList.add("scrolled");
-    } else {
-      navbar?.classList.remove("scrolled");
-    }
+    navbar?.classList.toggle("scrolled", window.scrollY > 10);
   });
 </script>

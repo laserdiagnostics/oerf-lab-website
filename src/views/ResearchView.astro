@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ResearchCard from "../components/ResearchCard.astro";
+import { researchAreas } from "../data/research";
+import { pageCopy } from "../i18n/pages";
+import { staticRoutes } from "../i18n/routes";
+import { t } from "../i18n/ui";
+import type { Locale } from "../i18n/types";
+
+export interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const copy = pageCopy[locale].research;
+const labels = t(locale);
+---
+
+<BaseLayout locale={locale} activeRoute="research" routePath={staticRoutes.research} title={copy.metaTitle}>
+  <HeroSection title={copy.heroTitle} subtitle={copy.heroSubtitle} tagline={copy.heroTagline} compact />
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle title={copy.overviewTitle} subtitle={copy.overviewSubtitle} />
+      <div class="research-grid">
+        {researchAreas.map((area) => <ResearchCard area={area} locale={locale} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <SectionTitle title={copy.detailsTitle} subtitle={copy.detailsSubtitle} />
+      <div style="display: flex; flex-direction: column; gap: var(--spacing-8);">
+        {researchAreas.map((area) => {
+          const areaCopy = area.content[locale];
+          return (
+            <div class="research-card" style="padding: var(--spacing-8);">
+              <h3>{areaCopy.title}</h3>
+              <p style="font-size: var(--fs-body); line-height: var(--lh-body); margin-bottom: var(--spacing-4);">
+                {areaCopy.description}
+              </p>
+              <h4 style="margin-bottom: var(--spacing-3);">{labels.keyFocusAreas}</h4>
+              <div class="research-card-tags">
+                {areaCopy.highlights.map((highlight) => <span class="tag">{highlight}</span>)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

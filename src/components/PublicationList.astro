@@ -1,12 +1,14 @@
 ---
 import PublicationCard from "./PublicationCard.astro";
 import type { Publication } from "../data/publications";
+import type { Locale } from "../i18n/types";
 
 export interface Props {
   publications: Publication[];
+  locale: Locale;
 }
 
-const { publications } = Astro.props;
+const { publications, locale } = Astro.props;
 
 const sorted = [...publications].sort((a, b) => b.year - a.year);
 const grouped: Record<number, Publication[]> = {};
@@ -26,7 +28,7 @@ const years = Object.keys(grouped)
     <div>
       <h3 class="publication-year">{year}</h3>
       {grouped[year].map((pub) => (
-        <PublicationCard pub={pub} />
+        <PublicationCard pub={pub} locale={locale} />
       ))}
     </div>
   ))}

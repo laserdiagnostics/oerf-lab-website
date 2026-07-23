@@ -2,6 +2,31 @@
 
 This file records material content, data, and layout changes so future updates can begin with the current site state.
 
+## 2026-07-23
+
+### Bilingual site
+
+- Added a complete Chinese site under `/zh/` while preserving every existing English URL.
+- Added shared bilingual page views for Home, Research, Team, member profiles, Publications, and Contact so the two languages cannot drift structurally.
+- Migrated site metadata, all four faculty profiles, all four research areas, and all four featured highlights to typed English/Chinese content.
+- Kept all 245 publication titles, author lists, journal metadata, DOI links, and paper links in their original academic English.
+- Added page-preserving language switches. The control intentionally displays the target language: `中文` on English pages and `EN` on Chinese pages.
+- Added an adaptive English/Chinese 404 page for GitHub Pages.
+
+### SEO and platform reliability
+
+- Added canonical URLs plus `en`, `zh-CN`, and `x-default` alternate links to every bilingual page.
+- Added bilingual sitemap alternates.
+- Made the shared Open Graph image a `BaseLayout` default so pages do not need to pass an `ogImage` prop; optional per-page overrides remain supported.
+- Added a real shared Open Graph asset at `public/images/og/oerf-lab-share.webp`.
+- Removed runtime Google Fonts requests and self-hosted Inter through the project dependency, with system Chinese-font fallbacks.
+
+### Verification
+
+- Added `npm run verify`, combining Astro type checks, bilingual source validation, a production build, built-page SEO checks, sitemap checks, and internal link/resource checks.
+- Validation asserts 4 members, 4 research areas, 4 featured highlights, and 245 publications, and verifies every English/Chinese route pair and language switch.
+- Updated the GitHub Pages workflow to run the full verification suite before uploading `dist/`.
+
 ## 2026-07-22
 
 ### Homepage and navigation

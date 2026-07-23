@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import TeamGrid from "../components/TeamGrid.astro";
+import { members } from "../data/members";
+import { pageCopy } from "../i18n/pages";
+import { localePath, staticRoutes } from "../i18n/routes";
+import { t } from "../i18n/ui";
+import type { Locale } from "../i18n/types";
+
+export interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const copy = pageCopy[locale].team;
+const labels = t(locale);
+---
+
+<BaseLayout locale={locale} activeRoute="team" routePath={staticRoutes.team} title={copy.metaTitle}>
+  <HeroSection title={copy.heroTitle} subtitle={copy.heroSubtitle} tagline={copy.heroTagline} compact />
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle title={copy.facultyTitle} subtitle={copy.facultySubtitle} />
+      <TeamGrid members={members} locale={locale} />
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <SectionTitle title={copy.joinTitle} subtitle={copy.joinSubtitle} />
+      <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+        {copy.joinParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <a href={localePath(locale, staticRoutes.contact)} class="btn btn-primary" style="margin-top: var(--spacing-4); display: inline-flex;">
+          {labels.contactUs}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,133 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ResearchCard from "../components/ResearchCard.astro";
+import TeamGrid from "../components/TeamGrid.astro";
+import HighlightBadge from "../components/HighlightBadge.astro";
+import { researchAreas } from "../data/research";
+import { members } from "../data/members";
+import { publications, isHomeHighlight } from "../data/publications";
+import { featuredHighlightConfigs } from "../data/highlights";
+import { pageCopy } from "../i18n/pages";
+import { localePath, staticRoutes } from "../i18n/routes";
+import { t } from "../i18n/ui";
+import type { Locale } from "../i18n/types";
+
+export interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const copy = pageCopy[locale].home;
+const labels = t(locale);
+const highlightPubs = publications.filter(isHomeHighlight).sort((a, b) => b.year - a.year);
+const featuredHighlights = featuredHighlightConfigs.flatMap((config) => {
+  const pub = highlightPubs.find((candidate) => candidate.id === config.id);
+  return pub ? [{ config, pub, copy: config.content[locale] }] : [];
+});
+const featuredIds = new Set(featuredHighlights.map(({ pub }) => pub.id));
+const otherHighlights = highlightPubs.filter((pub) => !featuredIds.has(pub.id)).slice(0, 3);
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
+---
+
+<BaseLayout locale={locale} activeRoute="home" routePath="" title={copy.metaTitle} description={copy.metaDescription}>
+  <HeroSection
+    title={copy.heroTitle}
+    subtitle={copy.heroSubtitle}
+    tagline={copy.heroTagline}
+    cta={[
+      { text: copy.exploreResearch, href: localePath(locale, staticRoutes.research) },
+      { text: copy.meetTeam, href: localePath(locale, staticRoutes.team) },
+    ]}
+  />
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle title={copy.teamTitle} subtitle={copy.teamSubtitle} />
+      <TeamGrid members={members} locale={locale} />
+    </div>
+  </section>
+
+  <section class="section" id="research-areas">
+    <div class="container">
+      <SectionTitle title={copy.researchTitle} subtitle={copy.researchSubtitle} />
+      <div class="research-grid">
+        {researchAreas.map((area) => <ResearchCard area={area} locale={locale} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="latest-highlights">
+    <div class="container">
+      <SectionTitle title={copy.highlightsTitle} subtitle={copy.highlightsSubtitle} />
+
+      <div class="featured-highlights">
+        {featuredHighlights.map(({ pub, config, copy: highlightCopy }) => {
+          const paperUrl = config.paperUrl ?? pub.paperUrl ?? `https://doi.org/${pub.doi}`;
+          return (
+            <article class="featured-highlight" id={`highlight-${pub.id}`}>
+              <a
+                class:list={["featured-highlight-media", config.mediaClass]}
+                href={paperUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${labels.readPaper}: ${pub.title}`}
+              >
+                <img
+                  src={`${base}/images/highlights/${config.image}`}
+                  alt={highlightCopy.alt}
+                  width="1672"
+                  height="941"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <div class="featured-highlight-content">
+                <p class="highlight-eyebrow">{pub.journal} / {pub.year}</p>
+                <h3>{pub.title}</h3>
+                <p class="featured-highlight-summary">{highlightCopy.summary}</p>
+                <dl class="highlight-metrics" aria-label={labels.keyPerformanceMetrics}>
+                  {config.metricValues.map((value, index) => (
+                    <div>
+                      <dt>{value}</dt>
+                      <dd>{highlightCopy.metricLabels[index]}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <div class="featured-highlight-actions">
+                  <a class="btn btn-primary" href={paperUrl} target="_blank" rel="noreferrer">{labels.readPaper}</a>
+                  <a class="highlight-text-link" href={localePath(locale, staticRoutes.publications)}>
+                    {labels.viewAllPublications} <span aria-hidden="true">-&gt;</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      {otherHighlights.length > 0 && (
+        <div class="more-highlights">
+          <h3 class="more-highlights-title">{labels.moreSelectedWork}</h3>
+          <div class="highlights-list">
+            {otherHighlights.map((pub) => (
+              <a
+                class="highlight-item"
+                href={pub.paperUrl ?? `https://doi.org/${pub.doi}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div class="highlight-year" aria-hidden="true">{pub.year}</div>
+                <div class="highlight-content">
+                  <h4>{pub.title}</h4>
+                  <p>
+                    {pub.journal}
+                    {pub.highlight && <HighlightBadge type={pub.highlight} locale={locale} />}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

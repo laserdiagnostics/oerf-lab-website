@@ -1,16 +1,18 @@
 ---
 import TeamMemberCard from "./TeamMemberCard.astro";
 import type { Member } from "../data/members";
+import type { Locale } from "../i18n/types";
 
 export interface Props {
   members: Member[];
+  locale: Locale;
 }
 
-const { members } = Astro.props;
+const { members, locale } = Astro.props;
 ---
 
 <div class="team-grid">
   {members
     .sort((a, b) => a.order - b.order)
-    .map((member) => <TeamMemberCard member={member} />)}
+    .map((member) => <TeamMemberCard member={member} locale={locale} />)}
 </div>
