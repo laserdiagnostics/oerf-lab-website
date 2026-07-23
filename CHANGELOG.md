@@ -8,6 +8,7 @@ This file records material content, data, and layout changes so future updates c
 
 - Added `Join us / 加入我们` to the shared desktop and mobile navigation, linking directly to the localized homepage recruitment section.
 - Resized the homepage hero to a balanced intermediate height: `52.5vh` on desktop and `45vh` on mobile, while keeping internal-page heroes compact.
+- Adjusted Weiwei Cai's portrait crop on team cards and profile pages to preserve the full head while trimming the lower edge.
 
 ### Homepage recruitment section
 

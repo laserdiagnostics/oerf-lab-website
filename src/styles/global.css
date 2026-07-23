@@ -451,6 +451,11 @@ p {
   object-fit: cover;
 }
 
+.team-card-photo[data-member-id="cai-weiwei"] img,
+.member-photo[data-member-id="cai-weiwei"] img {
+  object-position: center top;
+}
+
 .photo-fallback {
   display: flex;
   align-items: center;

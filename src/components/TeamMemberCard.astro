@@ -18,7 +18,7 @@ const photoFallback = nameFallback(copy.displayName);
 ---
 
 <a href={memberUrl} class="team-card">
-  <div class="team-card-photo">
+  <div class="team-card-photo" data-member-id={member.id}>
     <img
       src={photoUrl}
       alt={copy.displayName}
