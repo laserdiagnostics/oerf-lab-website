@@ -25,18 +25,13 @@ const placeholderAspect = 56.25; // 16:9
             <div class="talk-video-wrap">
               <iframe
                 src={`//player.bilibili.com/player.html?bvid=${talk.bvid}&page=1&high_quality=1&autoplay=0`}
-                scrolling="no"
-                border="0"
-                frameborder="no"
-                framespacing="0"
-                allowfullscreen="true"
+                allowfullscreen
                 allow="autoplay; encrypted-media"
                 class="talk-iframe"
                 title={talk.title[locale]}
                 loading="lazy"
                 style={`aspect-ratio:${placeholderAspect}`}
-              >
-              </iframe>
+              ></iframe>
             </div>
             <div class="talk-info">
               <h3>{talk.title[locale]}</h3>
