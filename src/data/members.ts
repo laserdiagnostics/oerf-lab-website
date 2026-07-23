@@ -31,7 +31,7 @@ export function getMemberCopy(member: Member, locale: Locale): MemberCopy {
 export const members: Member[] = [
   {
     id: "cai-weiwei",
-    photo: "/images/team/cai-weiwei.jpg",
+    photo: "/images/team/cai-weiwei.png",
     email: "cweiwei@sjtu.edu.cn",
     order: 1,
     content: {
