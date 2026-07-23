@@ -5,14 +5,14 @@
   "description": "OERF Lab - Optical & Extreme Reaction Flow Research Group at SJTU",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/clean-dist.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "check:types": "astro check",
     "check:i18n": "tsx scripts/check-i18n.ts",
     "check:html": "node scripts/check-built-html.mjs",
     "check:links": "node scripts/check-built-links.mjs",
-    "verify": "npm run check:types && npm run check:i18n && npm run build && npm run check:html && npm run check:links"
+    "clean": "node scripts/clean-dist.mjs",
+    "verify": "npm run check:types && npm run check:i18n && npm run clean && npm run build && npm run check:html && npm run check:links"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.0.0",
