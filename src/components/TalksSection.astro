@@ -8,7 +8,6 @@ export interface Props {
 
 const { locale } = Astro.props;
 const copy = talksData.content[locale];
-const placeholderAspect = 56.25; // 16:9
 ---
 
 <section class="section" id="talks" aria-labelledby="talks-title">
@@ -30,7 +29,6 @@ const placeholderAspect = 56.25; // 16:9
                 class="talk-iframe"
                 title={talk.title[locale]}
                 loading="lazy"
-                style={`aspect-ratio:${placeholderAspect}`}
               ></iframe>
             </div>
             <div class="talk-info">
@@ -63,28 +61,17 @@ const placeholderAspect = 56.25; // 16:9
   }
 
   .talk-card {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--spacing-4);
     background: var(--color-bg);
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-card);
   }
 
-  @media (min-width: 768px) {
-    .talk-card {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
   .talk-video-wrap {
     position: relative;
     width: 100%;
+    aspect-ratio: 16 / 9;
     background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .talk-iframe {
@@ -94,10 +81,7 @@ const placeholderAspect = 56.25; // 16:9
   }
 
   .talk-info {
-    padding: var(--spacing-6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: var(--spacing-6) var(--spacing-8);
   }
 
   .talk-info h3 {
