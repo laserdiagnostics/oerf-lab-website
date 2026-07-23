@@ -5,6 +5,7 @@ import SectionTitle from "../components/SectionTitle.astro";
 import ResearchCard from "../components/ResearchCard.astro";
 import TeamGrid from "../components/TeamGrid.astro";
 import HighlightBadge from "../components/HighlightBadge.astro";
+import TalksSection from "../components/TalksSection.astro";
 import RecruitmentSection from "../components/RecruitmentSection.astro";
 import { researchAreas } from "../data/research";
 import { members } from "../data/members";
@@ -131,6 +132,8 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
       )}
     </div>
   </section>
+
+  <TalksSection locale={locale} />
 
   <RecruitmentSection locale={locale} />
 </BaseLayout>

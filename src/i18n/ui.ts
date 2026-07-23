@@ -7,6 +7,7 @@ export interface UIStrings {
   publications: string;
   contact: string;
   joinUs: string;
+  talks: string;
   quickLinks: string;
   connect: string;
   readPaper: string;
@@ -48,6 +49,7 @@ export const ui: Bilingual<UIStrings> = {
     publications: "Publications",
     contact: "Contact",
     joinUs: "Join us",
+    talks: "Talks",
     quickLinks: "Quick Links",
     connect: "Connect",
     readPaper: "Read the paper",
@@ -87,6 +89,7 @@ export const ui: Bilingual<UIStrings> = {
     publications: "论文成果",
     contact: "联系我们",
     joinUs: "加入我们",
+    talks: "学术报告",
     quickLinks: "快速链接",
     connect: "相关链接",
     readPaper: "阅读论文",

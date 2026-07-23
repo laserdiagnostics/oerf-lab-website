@@ -1,0 +1,138 @@
+---
+import { talksData } from "../data/talks";
+import type { Locale } from "../i18n/types";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = talksData.content[locale];
+const placeholderAspect = 56.25; // 16:9
+---
+
+<section class="section" id="talks" aria-labelledby="talks-title">
+  <div class="container">
+    <div class="section-title">
+      <h2 id="talks-title">{copy.sectionTitle}</h2>
+      <p class="section-subtitle">{copy.sectionSubtitle}</p>
+    </div>
+
+    <div class="talks-grid">
+      {talksData.talks.map((talk) => {
+        return (
+          <article class="talk-card">
+            <div class="talk-video-wrap">
+              <iframe
+                src={`//player.bilibili.com/player.html?bvid=${talk.bvid}&page=1&high_quality=1&autoplay=0`}
+                scrolling="no"
+                border="0"
+                frameborder="no"
+                framespacing="0"
+                allowfullscreen="true"
+                allow="autoplay; encrypted-media"
+                class="talk-iframe"
+                title={talk.title[locale]}
+                loading="lazy"
+                style={`aspect-ratio:${placeholderAspect}`}
+              >
+              </iframe>
+            </div>
+            <div class="talk-info">
+              <h3>{talk.title[locale]}</h3>
+              <p>{talk.description[locale]}</p>
+              <div class="talk-meta">
+                <time datetime={talk.date}>
+                  {new Date(talk.date).toLocaleDateString(
+                    locale === "zh" ? "zh-CN" : "en-US",
+                    { year: "numeric", month: "long", day: "numeric" }
+                  )}
+                </time>
+                <span class="talk-duration">{talk.duration}</span>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .talks-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-8);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .talk-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+
+  @media (min-width: 768px) {
+    .talk-card {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .talk-video-wrap {
+    position: relative;
+    width: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .talk-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .talk-info {
+    padding: var(--spacing-6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .talk-info h3 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: var(--spacing-2);
+    line-height: 1.4;
+  }
+
+  .talk-info p {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-3);
+  }
+
+  .talk-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .talk-duration {
+    background: var(--color-bg-alt);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono, monospace);
+    font-size: var(--text-xs);
+  }
+</style>
