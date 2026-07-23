@@ -4,6 +4,15 @@ This file records material content, data, and layout changes so future updates c
 
 ## 2026-07-23
 
+### Homepage recruitment section
+
+- Added a bilingual **Join OERF / 加入我们** section after Latest Highlights on both homepages.
+- Added four original recruitment comic pages with accessible captions, descriptive alternative text, and optimized WebP delivery without publishing the character reference sheet.
+- Added a mobile-first recruitment summary, detailed opportunity and application information, and direct email links for all four faculty members.
+- Added a stable `#join-us` anchor to the homepage, linked it from the footer and the Team page, and kept the main navigation unchanged.
+- Centralized all recruitment copy, comic metadata, and contact addresses in `src/data/recruitment.ts` to keep the English and Chinese versions synchronized.
+- Added hidden bilingual speaker labels for screen readers, shortened the third comic's English alternative text, and strengthened the quick-summary hierarchy with a localized open-positions label.
+
 ### Post-audit hardening
 
 - Isolated development output in `.astro-dev/` so running dev servers cannot remove production sitemap files or add development manifests to `dist/`.

@@ -33,6 +33,11 @@
   --color-highlight-science: #d93025;
   --color-highlight-nature: #e8a817;
   --color-highlight-cover: #1a8a4a;
+  --color-recruitment-bg: #f9f6f0;
+  --color-recruitment-dialogue: #f0f3f7;
+  --color-recruitment-student: #0a2540;
+  --color-recruitment-partner: #ed8936;
+  --color-recruitment-email: #e8ede8;
 
   --font-sans: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", monospace;
@@ -1039,7 +1044,217 @@ p {
   margin: 0;
 }
 
-/* ----- 15. SJTU SJTU Logo Area ----- */
+/* ----- 15. Recruitment on Home ----- */
+.recruitment-section {
+  background: var(--color-recruitment-bg);
+  scroll-margin-top: 64px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.recruitment-section-title {
+  margin-bottom: var(--spacing-8);
+}
+
+.recruitment-quick-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-6);
+  max-width: 960px;
+  margin: 0 auto var(--spacing-12);
+  padding: var(--spacing-6);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(10, 37, 64, 0.13);
+  border-radius: var(--radius-lg);
+}
+
+.recruitment-quick-summary p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 1.05rem;
+}
+
+.recruitment-quick-copy {
+  display: grid;
+  gap: var(--spacing-2);
+}
+
+.recruitment-quick-label {
+  width: fit-content;
+  padding: var(--spacing-1) var(--spacing-3);
+  color: var(--color-navy);
+  background: var(--color-recruitment-email);
+  border: 1px solid rgba(10, 37, 64, 0.12);
+  border-radius: 999px;
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.recruitment-details-link {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: var(--color-navy);
+  font-size: var(--fs-small);
+  font-weight: 700;
+}
+
+.recruitment-details-link:hover {
+  color: var(--color-accent);
+}
+
+.recruitment-story-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--spacing-8);
+}
+
+.recruitment-story-card {
+  overflow: hidden;
+  background: var(--color-bg);
+  border: 1px solid rgba(10, 37, 64, 0.13);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.recruitment-story-copy {
+  padding: var(--spacing-6);
+}
+
+.recruitment-story-copy h3 {
+  margin-bottom: var(--spacing-4);
+  color: var(--color-navy);
+}
+
+.recruitment-dialogue {
+  display: grid;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4);
+  background: var(--color-recruitment-dialogue);
+  border-radius: var(--radius-md);
+}
+
+.recruitment-dialogue p {
+  margin: 0;
+  padding-left: var(--spacing-3);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+  border-left: 3px solid var(--color-recruitment-student);
+}
+
+.recruitment-dialogue .recruitment-dialogue-partner {
+  border-left-color: var(--color-recruitment-partner);
+}
+
+.recruitment-story-card > img {
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+
+.recruitment-details {
+  margin-top: var(--spacing-16);
+  scroll-margin-top: 84px;
+}
+
+.recruitment-details-heading {
+  max-width: 680px;
+  margin: 0 auto var(--spacing-8);
+  text-align: center;
+}
+
+.recruitment-details-heading h3 {
+  margin-bottom: var(--spacing-2);
+  color: var(--color-navy);
+}
+
+.recruitment-details-heading p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.recruitment-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-6);
+}
+
+.recruitment-info-card,
+.recruitment-apply-card {
+  padding: var(--spacing-6);
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(10, 37, 64, 0.13);
+  border-radius: var(--radius-lg);
+}
+
+.recruitment-info-card h4,
+.recruitment-apply-card h4 {
+  margin-bottom: var(--spacing-3);
+  color: var(--color-navy);
+}
+
+.recruitment-info-card p,
+.recruitment-apply-card p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+}
+
+.recruitment-info-card ul {
+  display: grid;
+  gap: var(--spacing-2);
+  padding-left: 1.2rem;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+  list-style: disc;
+}
+
+.recruitment-apply-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.35fr);
+  gap: var(--spacing-8);
+  margin-top: var(--spacing-6);
+}
+
+.recruitment-email-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-4);
+}
+
+.recruitment-email {
+  padding: var(--spacing-3) var(--spacing-4);
+  color: var(--color-navy);
+  background: var(--color-recruitment-email);
+  border: 1px solid rgba(10, 37, 64, 0.1);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.recruitment-email:hover {
+  color: var(--color-accent);
+  border-color: rgba(44, 111, 187, 0.35);
+}
+
+/* ----- 16. SJTU SJTU Logo Area ----- */
 .sjtu-header {
   display: flex;
   align-items: center;
@@ -1051,7 +1266,7 @@ p {
   width: auto;
 }
 
-/* ----- 16. Responsive ----- */
+/* ----- 17. Responsive ----- */
 @media (max-width: 1023px) {
   .featured-highlight {
     grid-template-columns: 1fr;
@@ -1159,5 +1374,34 @@ p {
 
   .highlight-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .recruitment-quick-summary {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: var(--spacing-8);
+  }
+
+  .recruitment-story-grid,
+  .recruitment-info-grid,
+  .recruitment-apply-card,
+  .recruitment-email-list {
+    grid-template-columns: 1fr;
+  }
+
+  .recruitment-story-grid {
+    max-width: 540px;
+    margin: 0 auto;
+    gap: var(--spacing-6);
+  }
+
+  .recruitment-story-copy,
+  .recruitment-info-card,
+  .recruitment-apply-card {
+    padding: var(--spacing-4);
+  }
+
+  .recruitment-details {
+    margin-top: var(--spacing-12);
   }
 }

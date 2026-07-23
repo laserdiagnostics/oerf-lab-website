@@ -6,6 +6,7 @@ export interface UIStrings {
   team: string;
   publications: string;
   contact: string;
+  joinUs: string;
   quickLinks: string;
   connect: string;
   readPaper: string;
@@ -27,6 +28,7 @@ export interface UIStrings {
   university: string;
   teamMembers: string;
   contactUs: string;
+  recruitmentDetails: string;
   viewOnGoogleMaps: string;
   pageNotFound: string;
   pageNotFoundDescription: string;
@@ -45,6 +47,7 @@ export const ui: Bilingual<UIStrings> = {
     team: "Team",
     publications: "Publications",
     contact: "Contact",
+    joinUs: "Join Us",
     quickLinks: "Quick Links",
     connect: "Connect",
     readPaper: "Read the paper",
@@ -66,6 +69,7 @@ export const ui: Bilingual<UIStrings> = {
     university: "University",
     teamMembers: "Team Members",
     contactUs: "Contact Us",
+    recruitmentDetails: "Recruitment details",
     viewOnGoogleMaps: "View on Google Maps",
     pageNotFound: "Page Not Found",
     pageNotFoundDescription: "The page you requested could not be found.",
@@ -82,6 +86,7 @@ export const ui: Bilingual<UIStrings> = {
     team: "团队成员",
     publications: "论文成果",
     contact: "联系我们",
+    joinUs: "加入我们",
     quickLinks: "快速链接",
     connect: "相关链接",
     readPaper: "阅读论文",
@@ -103,6 +108,7 @@ export const ui: Bilingual<UIStrings> = {
     university: "学校",
     teamMembers: "团队成员",
     contactUs: "联系我们",
+    recruitmentDetails: "查看招生详情",
     viewOnGoogleMaps: "在 Google 地图中查看",
     pageNotFound: "页面未找到",
     pageNotFoundDescription: "无法找到你请求的页面。",

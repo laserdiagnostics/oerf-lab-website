@@ -30,8 +30,8 @@ const labels = t(locale);
       <SectionTitle title={copy.joinTitle} subtitle={copy.joinSubtitle} />
       <div style="max-width: 700px; margin: 0 auto; text-align: center;">
         {copy.joinParagraphs.map((paragraph) => <p>{paragraph}</p>)}
-        <a href={localePath(locale, staticRoutes.contact)} class="btn btn-primary" style="margin-top: var(--spacing-4); display: inline-flex;">
-          {labels.contactUs}
+        <a href={`${localePath(locale, staticRoutes.home)}#join-us`} class="btn btn-primary" style="margin-top: var(--spacing-4); display: inline-flex;">
+          {labels.recruitmentDetails}
         </a>
       </div>
     </div>

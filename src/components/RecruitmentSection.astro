@@ -1,0 +1,104 @@
+---
+import { recruitmentData } from "../data/recruitment";
+import type { Locale } from "../i18n/types";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = recruitmentData.content[locale];
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
+---
+
+<section class="section recruitment-section" id="join-us" aria-labelledby="join-us-title">
+  <div class="container">
+    <div class="section-title recruitment-section-title">
+      <h2 id="join-us-title">{copy.title}</h2>
+      <p class="section-subtitle">{copy.subtitle}</p>
+    </div>
+
+    <div class="recruitment-quick-summary">
+      <div class="recruitment-quick-copy">
+        <span class="recruitment-quick-label">{copy.quickLabel}</span>
+        <p>{copy.quickSummary}</p>
+      </div>
+      <a class="recruitment-details-link" href="#recruitment-details">
+        {copy.detailsLink}<span aria-hidden="true">&darr;</span>
+      </a>
+    </div>
+
+    <div class="recruitment-story-grid">
+      {recruitmentData.cards.map((card) => {
+        const cardCopy = card.content[locale];
+        return (
+          <article class="recruitment-story-card">
+            <div class="recruitment-story-copy">
+              <h3>{cardCopy.title}</h3>
+              <div class="recruitment-dialogue">
+                <p class="recruitment-dialogue-student">
+                  <span class="sr-only">{copy.speakerLabels[0]}: </span>{cardCopy.dialogue[0]}
+                </p>
+                <p class="recruitment-dialogue-partner">
+                  <span class="sr-only">{copy.speakerLabels[1]}: </span>{cardCopy.dialogue[1]}
+                </p>
+              </div>
+            </div>
+            <img
+              src={`${base}/images/recruitment/${card.image}`}
+              alt={cardCopy.alt}
+              width={card.width}
+              height={card.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </article>
+        );
+      })}
+    </div>
+
+    <div class="recruitment-details" id="recruitment-details" aria-labelledby="recruitment-details-title">
+      <div class="recruitment-details-heading">
+        <h3 id="recruitment-details-title">{copy.detailsTitle}</h3>
+        <p>{copy.detailsSubtitle}</p>
+      </div>
+
+      <div class="recruitment-info-grid">
+        <article class="recruitment-info-card">
+          <h4>{copy.opportunitiesTitle}</h4>
+          <ul>
+            {copy.opportunities.map((opportunity) => <li>{opportunity}</li>)}
+          </ul>
+        </article>
+        <article class="recruitment-info-card">
+          <h4>{copy.backgroundsTitle}</h4>
+          <p>{copy.backgrounds}</p>
+        </article>
+        <article class="recruitment-info-card">
+          <h4>{copy.valuesTitle}</h4>
+          <p>{copy.values}</p>
+        </article>
+        <article class="recruitment-info-card">
+          <h4>{copy.trainingTitle}</h4>
+          <p>{copy.training}</p>
+        </article>
+      </div>
+
+      <div class="recruitment-apply-card">
+        <div>
+          <h4>{copy.howToApplyTitle}</h4>
+          <p>{copy.howToApply}</p>
+        </div>
+        <div>
+          <h4>{copy.contactTitle}</h4>
+          <p>{copy.contactSubtitle}</p>
+          <div class="recruitment-email-list">
+            {recruitmentData.emails.map((email) => (
+              <a class="recruitment-email" href={`mailto:${email}`}>{email}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

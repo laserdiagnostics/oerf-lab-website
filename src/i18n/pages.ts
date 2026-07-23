@@ -112,8 +112,7 @@ export const pageCopy: Bilingual<PageCopy> = {
       joinTitle: "Join Us",
       joinSubtitle: "We are always looking for motivated students and researchers.",
       joinParagraphs: [
-        "The OERF Lab recruits Ph.D. students, Master's students, and undergraduate interns year-round. Doctoral students have opportunities for co-training with renowned international collaborators. Outstanding candidates may receive recommendation letters for top universities worldwide.",
-        "Prospective students and visiting scholars are welcome to contact individual faculty members directly via email.",
+        "Explore recruitment opportunities, training pathways, and application details.",
       ],
     },
     publications: {
@@ -176,8 +175,7 @@ export const pageCopy: Bilingual<PageCopy> = {
       joinTitle: "加入我们",
       joinSubtitle: "我们长期欢迎优秀学生与科研人员加入团队。",
       joinParagraphs: [
-        "OERF Lab 常年招收博士研究生、硕士研究生和本科实习生。博士生有机会与国际知名合作团队开展联合培养，表现优秀者可获得申请国际一流大学的推荐支持。",
-        "欢迎有意向的学生和访问学者通过电子邮件直接联系相关教师。",
+        "了解更多招生信息、培养机会和申请方式。",
       ],
     },
     publications: {
