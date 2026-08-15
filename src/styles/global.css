@@ -57,6 +57,7 @@
   --spacing-2: 0.5rem;
   --spacing-3: 0.75rem;
   --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
   --spacing-6: 1.5rem;
   --spacing-8: 2rem;
   --spacing-12: 3rem;
@@ -1271,7 +1272,250 @@ p {
   width: auto;
 }
 
-/* ----- 17. Responsive ----- */
+/* ----- 17. Alumni ----- */
+.section.alumni-section {
+  padding-top: calc(64px + var(--spacing-12));
+}
+
+.alumni-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.alumni-card {
+  display: grid;
+  grid-template-columns: minmax(400px, 440px) minmax(0, 1fr);
+  overflow: hidden;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.alumni-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.alumni-identity {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--spacing-6);
+  padding: var(--spacing-8);
+  background: var(--color-bg-alt);
+  border-right: 1px solid var(--color-border);
+}
+
+.alumni-photo {
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-card);
+}
+
+.alumni-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+}
+
+/* Keep Liu Hecong's full portrait centered without the extra crop used previously. */
+.alumni-photo[data-profile="liu-hecong"] img {
+  object-fit: contain;
+  object-position: center center;
+  transform: none;
+}
+
+.alumni-photo-fallback {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  place-items: center;
+  align-content: center;
+  gap: var(--spacing-2);
+  color: var(--color-navy);
+  background: var(--color-bg);
+  text-align: center;
+}
+
+.alumni-photo-fallback span {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.alumni-photo-fallback small {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-caption);
+}
+
+.alumni-identity-copy h3 {
+  margin-bottom: var(--spacing-1);
+  color: var(--color-navy);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.alumni-degree {
+  margin-bottom: var(--spacing-3);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+}
+
+.alumni-title {
+  margin-bottom: var(--spacing-1);
+  color: var(--color-accent);
+  font-size: var(--fs-body);
+  font-weight: 700;
+}
+
+.alumni-institution,
+.alumni-department {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+.alumni-email {
+  display: inline-block;
+  margin-top: var(--spacing-3);
+  color: var(--color-accent);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.alumni-profile-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-4);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-radius: 999px;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  transition: background var(--transition), color var(--transition);
+}
+
+.alumni-profile-link:hover {
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+}
+
+.alumni-card-body {
+  padding: var(--spacing-8) var(--spacing-8) var(--spacing-6);
+}
+
+.alumni-bio {
+  margin-bottom: var(--spacing-8);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+  line-height: 1.7;
+}
+
+.alumni-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+  padding-bottom: var(--spacing-8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.alumni-detail-grid h4,
+.alumni-highlights h4 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+  color: var(--color-navy);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.alumni-detail-grid h4::before,
+.alumni-highlights h4::before {
+  content: "";
+  flex-shrink: 0;
+  width: 3px;
+  height: 1em;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
+
+.alumni-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.alumni-tags span {
+  padding: 0.35rem var(--spacing-3);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-radius: 999px;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+}
+
+.alumni-detail-grid ul,
+.alumni-highlights ul {
+  display: grid;
+  gap: var(--spacing-3);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
+.alumni-detail-grid ul li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.alumni-detail-grid ul li::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0.55;
+}
+
+.alumni-highlights {
+  padding-top: 0;
+}
+
+.alumni-highlights ul li {
+  position: relative;
+  padding-left: 1.6rem;
+}
+
+.alumni-highlights ul li::before {
+  content: "\2713";
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* ----- 18. Responsive ----- */
 @media (max-width: 1023px) {
   .featured-highlight {
     grid-template-columns: 1fr;
@@ -1303,6 +1547,73 @@ p {
   .member-photo {
     width: 200px;
     height: 200px;
+  }
+
+  .alumni-card {
+    grid-template-columns: minmax(300px, 340px) minmax(0, 1fr);
+  }
+
+  .alumni-identity {
+    grid-template-columns: 130px minmax(0, 1fr);
+    gap: var(--spacing-5);
+    padding: var(--spacing-6);
+  }
+
+  .alumni-card-body {
+    padding: var(--spacing-6);
+  }
+}
+
+/* 平板中段（768-959px）：提前收起汉堡导航，毕业生卡片提前单列 */
+@media (max-width: 959px) {
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    padding: var(--spacing-4);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    gap: var(--spacing-1);
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links a {
+    padding: var(--spacing-3) var(--spacing-4);
+    border-radius: var(--radius-md);
+    width: 100%;
+  }
+
+  .navbar-links a:hover {
+    background: var(--color-bg-alt);
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .alumni-card {
+    grid-template-columns: 1fr;
+  }
+
+  .alumni-identity {
+    display: grid;
+    grid-template-columns: 108px minmax(0, 1fr);
+    align-items: start;
+    gap: var(--spacing-4);
+    padding: var(--spacing-5);
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .alumni-card-body {
+    padding: var(--spacing-5);
   }
 }
 
@@ -1441,5 +1752,49 @@ p {
 
   .recruitment-details {
     margin-top: var(--spacing-12);
+  }
+
+  .alumni-detail-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+    margin-bottom: var(--spacing-6);
+    padding-bottom: var(--spacing-6);
+  }
+
+  .alumni-card {
+    grid-template-columns: 1fr;
+  }
+
+  .alumni-identity {
+    display: grid;
+    grid-template-columns: 108px minmax(0, 1fr);
+    align-items: start;
+    gap: var(--spacing-4);
+    padding: var(--spacing-5);
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .alumni-identity-copy h3 {
+    margin-bottom: var(--spacing-1);
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+
+  .alumni-degree {
+    margin-bottom: var(--spacing-2);
+  }
+
+  .alumni-profile-link {
+    padding: var(--spacing-1) var(--spacing-3);
+    font-size: var(--fs-caption);
+  }
+
+  .alumni-card-body {
+    padding: var(--spacing-5);
+  }
+
+  .alumni-bio {
+    margin-bottom: var(--spacing-6);
   }
 }

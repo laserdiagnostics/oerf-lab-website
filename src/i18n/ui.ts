@@ -4,6 +4,7 @@ export interface UIStrings {
   home: string;
   research: string;
   team: string;
+  alumni: string;
   publications: string;
   contact: string;
   joinUs: string;
@@ -46,6 +47,7 @@ export const ui: Bilingual<UIStrings> = {
     home: "Home",
     research: "Research",
     team: "Team",
+    alumni: "Alumni",
     publications: "Publications",
     contact: "Contact",
     joinUs: "Join us",
@@ -86,6 +88,7 @@ export const ui: Bilingual<UIStrings> = {
     home: "主页",
     research: "研究方向",
     team: "团队成员",
+    alumni: "毕业生风采",
     publications: "论文成果",
     contact: "联系我们",
     joinUs: "加入我们",

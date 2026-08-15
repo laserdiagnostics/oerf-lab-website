@@ -1,0 +1,108 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { alumniProfiles } from "../data/alumni";
+import { staticRoutes } from "../i18n/routes";
+import type { Locale } from "../i18n/types";
+
+export interface Props { locale: Locale; }
+
+const { locale } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
+
+const copy = {
+  en: {
+    metaTitle: "Alumni",
+    researchAreas: "Research areas",
+    education: "Education",
+    selectedHighlights: "Selected highlights",
+    viewProfile: "View profile",
+    photoFallback: "Photo pending",
+  },
+  zh: {
+    metaTitle: "毕业生风采",
+    researchAreas: "研究方向",
+    education: "教育经历",
+    selectedHighlights: "代表性亮点",
+    viewProfile: "查看主页",
+    photoFallback: "照片待补充",
+  },
+}[locale];
+---
+
+<BaseLayout locale={locale} activeRoute="alumni" routePath={staticRoutes.alumni} title={copy.metaTitle}>
+  <section class="section alumni-section" aria-label={copy.metaTitle}>
+    <div class="container">
+      <h1 class="sr-only">{copy.metaTitle}</h1>
+      <div class="alumni-grid">
+        {alumniProfiles.map((profile) => {
+          const item = profile.content[locale];
+          const initials = item.displayName
+            .split(/\s+/)
+            .map((part) => part[0])
+            .join("")
+            .slice(0, 2)
+            .toUpperCase();
+          const photoUrl = profile.photo ? `${base}${profile.photo}` : undefined;
+
+          return (
+            <article class="alumni-card">
+              <aside class="alumni-identity">
+                <div class="alumni-photo" data-profile={profile.id}>
+                  {photoUrl ? (
+                    <img
+                      src={photoUrl}
+                      alt={item.displayName}
+                      decoding="async"
+                      loading="lazy"
+                      onerror="this.style.display='none';this.parentElement.querySelector('.alumni-photo-fallback').hidden=false"
+                    />
+                  ) : null}
+                  <div class="alumni-photo-fallback" hidden={Boolean(photoUrl)}>
+                    <span>{initials}</span>
+                    <small>{copy.photoFallback}</small>
+                  </div>
+                </div>
+                <div class="alumni-identity-copy">
+                  <h3>{item.displayName}</h3>
+                  <p class="alumni-degree">{item.degreeLine}</p>
+                  <p class="alumni-title">{item.currentTitle}</p>
+                  <p class="alumni-institution">{item.institution}</p>
+                  <p class="alumni-department">{item.department}</p>
+                  <a class="alumni-email" href={`mailto:${item.email}`}>{item.email}</a>
+                  <a class="alumni-profile-link" href={profile.sourceUrl} target="_blank" rel="noopener">
+                    {copy.viewProfile}
+                  </a>
+                </div>
+              </aside>
+              <div class="alumni-card-body">
+                <p class="alumni-bio">{item.bio}</p>
+
+                <div class="alumni-detail-grid">
+                  <section>
+                    <h4>{copy.researchAreas}</h4>
+                    <div class="alumni-tags">
+                      {item.researchAreas.map((area) => <span>{area}</span>)}
+                    </div>
+                  </section>
+                  <section>
+                    <h4>{copy.education}</h4>
+                    <ul>
+                      {item.education.map((entry) => <li>{entry}</li>)}
+                    </ul>
+                  </section>
+                </div>
+
+                <section class="alumni-highlights">
+                  <h4>{copy.selectedHighlights}</h4>
+                  <ul>
+                    {item.highlights.map((highlight) => <li>{highlight}</li>)}
+                  </ul>
+                </section>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

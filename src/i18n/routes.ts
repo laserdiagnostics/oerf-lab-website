@@ -6,6 +6,7 @@ export const staticRoutes = {
   home: "",
   research: "research",
   team: "team",
+  alumni: "alumni",
   publications: "publications",
   contact: "contact",
 } as const;
