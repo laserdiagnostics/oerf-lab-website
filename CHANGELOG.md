@@ -2,6 +2,17 @@
 
 This file records material content, data, and layout changes so future updates can begin with the current site state.
 
+## 2026-10-02
+
+### New featured highlight
+
+- Added the *Nature Reviews Electrical Engineering* review "Light field detection in the age of artificial intelligence" as the fifth featured highlight on both homepages, placed above the 2026 *Nature Electronics* memristor spectrometer card.
+- Added the publication record with its DOI, the ten-author list, and Cai Weiwei as the affiliated member; added `Nature Reviews Electrical Engineering` to the homepage journal whitelist.
+- Added bilingual card copy, three metrics (six optical information dimensions, three co-design layers, 150 references), and the supplied cover artwork converted to a WebP.
+- Trimmed the artwork to its content bounds (989×928) after measuring that the original carried roughly 340px of black margin on each side, and added a `featured-highlight-media-dark` variant so the surplus width is letterboxed in the same black and the media column reads as one continuous image.
+- Added optional per-highlight intrinsic `width` and `height` so each card reserves the correct layout space before its image loads.
+- Raised the publication count assertions in `scripts/check-i18n.ts` and `scripts/check-built-html.mjs` from 245 to 246, and the featured highlight assertion from four to five.
+
 ## 2026-07-23
 
 ### Homepage layout and navigation

@@ -907,8 +907,20 @@ p {
 }
 
 .featured-highlight-media-diagram:hover img,
-.featured-highlight-media-contain:hover img {
+.featured-highlight-media-contain:hover img,
+.featured-highlight-media-dark:hover img {
   transform: none;
+}
+
+/* Artwork with a black background: letterbox the surplus width in the same
+   black so the media column reads as one continuous image. */
+.featured-highlight-media-dark {
+  background: #000;
+}
+
+.featured-highlight-media-dark img {
+  object-fit: contain;
+  background: #000;
 }
 
 .featured-highlight-content {

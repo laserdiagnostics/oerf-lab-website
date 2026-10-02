@@ -12,10 +12,36 @@ export interface FeaturedHighlightConfig {
   mediaClass: string;
   paperUrl?: string;
   metricValues: [string, string, string];
+  /** Intrinsic pixel size, used to reserve layout space before the image loads. */
+  width?: number;
+  height?: number;
   content: Bilingual<HighlightCopy>;
 }
 
 export const featuredHighlightConfigs: FeaturedHighlightConfig[] = [
+  {
+    id: "cai-nature-reviews-electrical-engineering-2026",
+    image: "light-field-detection-ai-2026.webp",
+    mediaClass: "featured-highlight-media-dark",
+    width: 989,
+    height: 928,
+    paperUrl: "https://doi.org/10.1038/s44287-026-00328-0",
+    metricValues: ["6", "3", "150"],
+    content: {
+      en: {
+        alt: "A physical apple transformed into a digital sphere built from binary digits",
+        summary:
+          "This Review surveys how artificial intelligence reshapes computational light field detection, from AI-assisted encoder design and AI-based reconstruction to system-level co-design, and sets out differentiable digital twins as a route to jointly optimizing physical encoders and reconstruction models.",
+        metricLabels: ["optical information dimensions", "co-design layers", "references reviewed"],
+      },
+      zh: {
+        alt: "实体苹果转化为由二进制数字构成的数字球体",
+        summary:
+          "该综述梳理人工智能从辅助编码器设计、基于人工智能的解码到系统级协同优化三个层面重塑计算光场检测的过程，并提出可微分数字孪生是联合优化物理编码器与重构模型的可行路径。",
+        metricLabels: ["光场信息维度", "协同优化层面", "综述参考文献数"],
+      },
+    },
+  },
   {
     id: "zhao-nature-electronics-2026",
     image: "memristor-spectrometer-2026.webp",

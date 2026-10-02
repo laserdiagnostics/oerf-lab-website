@@ -79,8 +79,8 @@ for (const highlight of featuredHighlightConfigs) {
   }
 }
 
-if (publications.length !== 245) {
-  fail(`Expected 245 publications, found ${publications.length}`);
+if (publications.length !== 246) {
+  fail(`Expected 246 publications, found ${publications.length}`);
 }
 
 if (nameFallback("Weiwei Cai") !== "WC") fail("English photo fallback must use two initials");

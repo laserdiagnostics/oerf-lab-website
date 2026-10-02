@@ -26,7 +26,8 @@ export const boldNames = [
 export const homeJournals = [
   "Nature", "Science", "Nature Electronics", "Nature Photonics",
   "Nature Communications", "Nature Synthesis", "Nature Chemical Engineering",
-  "Science Advances", "eLight", "Progress in Energy and Combustion Science",
+  "Nature Reviews Electrical Engineering", "Science Advances", "eLight",
+  "Progress in Energy and Combustion Science",
 ];
 
 export const homeMemberIds = ["cai-weiwei", "liu-ning"];
@@ -44,6 +45,15 @@ export const publications: Publication[] = [
     pages: "6915-6924",
     memberIds: ["cai-weiwei"],
     paperUrl: "https://opg.optica.org/abstract.cfm?uri=ao-65-20-6915",
+  },
+  {
+    id: "cai-nature-reviews-electrical-engineering-2026",
+    title: "Light field detection in the age of artificial intelligence",
+    authors: ["Weiwei Cai", "Yiru Zhang", "Enbo Yang", "Zesheng Chen", "Zhiying Song", "Ni Chen", "Lei Jin", "Zongyin Yang", "Zhipei Sun", "Tawfique Hasan"],
+    journal: "Nature Reviews Electrical Engineering",
+    year: 2026,
+    doi: "10.1038/s44287-026-00328-0",
+    memberIds: ["cai-weiwei"],
   },
   {
     id: "combustion-characteristics-of-single-iron-particles-under-ammoni-2026",

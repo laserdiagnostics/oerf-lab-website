@@ -82,12 +82,12 @@ for (const file of htmlFiles) {
 
   if (relative === "publications/index.html" || relative === "zh/publications/index.html") {
     const count = $(".publication-card").length;
-    if (count !== 245) failures.push(`${relative}: expected 245 publications, found ${count}`);
+    if (count !== 246) failures.push(`${relative}: expected 246 publications, found ${count}`);
   }
 
   if (relative === "index.html" || relative === "zh/index.html") {
     if ($(".research-card").length !== 4) failures.push(`${relative}: expected 4 research areas`);
-    if ($(".featured-highlight").length !== 4) failures.push(`${relative}: expected 4 featured highlights`);
+    if ($(".featured-highlight").length !== 5) failures.push(`${relative}: expected 5 featured highlights`);
   }
 
   if (relative === "research/index.html" || relative === "zh/research/index.html") {
